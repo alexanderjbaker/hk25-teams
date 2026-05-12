@@ -22,17 +22,13 @@ tracks_file="../../TC_tracks/$run.csv"
 CONNECT_FILE=/home/users/sbourdin/WCRP_Hackathon/hk25-teams/hk25-TropCyc/ConnectivityFiles/ConnectivityFiles_for_healpix_zoom_$zoom.txt
 
 # Output
-out_nodefile="../../${var}/${run}_rprof.nc"
+out_nodefile="../../${run}_rprof.csv"
 
 # Prepare file list
-flist=`ls $data_pp_dir/*${var}_zoom_${zoom}.nc`
-INPUT=""
-for f in $flist
-do
-    INPUT="$INPUT$f;"
-done
-INPUT=${INPUT:0:-1} # Remove last ;
-echo $INPUT > INPUT.txt
+u_file=$data_pp_dir/data_healpix_uas_zoom_${zoom}.nc
+v_file=$data_pp_dir/data_healpix_vas_zoom_${zoom}.nc
+echo $u_file > INPUT.txt
+echo $v_file >> INPUT.txt
 
 conda run -n hackathon NodeFileEditor \
 --in_nodefile "$tracks_file" \
